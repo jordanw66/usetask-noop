@@ -1,8 +1,19 @@
-import { component$} from '@builder.io/qwik';
+import { component$, useServerMount$, useTask$} from '@builder.io/qwik';
+import { isServer } from '@builder.io/qwik/build';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
+  useTask$(() => {
+    if (isServer) {
+      console.log('SUPERSECRET123');
+    }
+  });
+
+  useServerMount$(() => {
+    console.log('ACTUALLYSECRET');
+  });
+
   return (
     <div>
       <h1>
